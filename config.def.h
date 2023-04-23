@@ -98,44 +98,49 @@ float alpha = 0.8;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
 
-	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"#5c5cff",
-	"magenta",
-	"cyan",
-	"white",
+  /* 8 normal colors */
+  [0] = "#252525", /* black   */
+  [1] = "#ef6769", /* red     */
+  [2] = "#a6e22e", /* green   */
+  [3] = "#fd971f", /* yellow  */
+  [4] = "#6495ed", /* blue    */
+  [5] = "#deb887", /* magenta */
+  [6] = "#b0c4de", /* cyan    */
+  [7] = "#dbdcdc", /* white   */
 
-	[255] = 0,
+  /* 8 bright colors */
+  [8]  = "#454545", /* black   */
+  [9]  = "#fc7ca5", /* red     */
+  [10] = "#b6e354", /* green   */
+  [11] = "#fd971f", /* yellow  */
+  [12] = "#87ceeb", /* blue    */
+  [13] = "#996600", /* magenta */
+  [14] = "#87ceeb", /* cyan    */
+  [15] = "#fdfdfd", /* white   */
 
-	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
-	"#555555",
-	"gray90", /* default foreground colour */
-	"black", /* default background colour */
+  /* special colors */
+  [256] = "#000000", /* background */
+  [257] = "#ffffff", /* foreground */
+  [258] = "#E3242B", /* main */
+  [259] = "#FCE8E9", /* secondary */
 };
-
 
 /*
  * Default colors (colorname index)
- * foreground, background, cursor, reverse cursor
+ * foreground, background, cursor
  */
-unsigned int defaultfg = 258;
-unsigned int defaultbg = 259;
-unsigned int defaultcs = 256;
-static unsigned int defaultrcs = 257;
+unsigned int defaultfg = 259;
+unsigned int defaultbg = 256;
+unsigned int defaultcs = 258;
+unsigned int defaultrcs = 258;
+/*
+ * Colors used, when the specific fg == defaultfg. So in reverse mode this
+ * will reverse too. Another logic would only make the simple feature too
+ * complex.
+ */
+static unsigned int defaultitalic = 7;
+static unsigned int defaultunderline = 7;
 
 /*
  * Default shape of cursor
@@ -164,7 +169,7 @@ static unsigned int mousebg = 0;
  * Color used to display font attributes when fontconfig selected a font which
  * doesn't match the ones requested.
  */
-static unsigned int defaultattr = 11;
+static unsigned int defaultattr = 14;
 
 /*
  * Force mouse select/shortcuts while mask is active (when MODE_MOUSE is set).
